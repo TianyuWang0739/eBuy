@@ -77,8 +77,18 @@ WSGI_APPLICATION = 'eBuy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        
+         # Name of database
+        'NAME': 'ebuy',
+         # Address of database
+        'HOST':'localhost',
+         # Port of database
+        'PORT':'3306',
+         # User name of database
+        'USER':'root',
+         # Password of database
+        'PASSWORD':'11111111',
     }
 }
 
