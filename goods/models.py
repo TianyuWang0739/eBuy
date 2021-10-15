@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create the goods category data list here.
+# Create the goods category model here.
 class GoodsCategory(models.Model):
    # The name of categorary
    gc_name=models.CharField(max_length=50)
@@ -9,7 +9,7 @@ class GoodsCategory(models.Model):
    # The picture of categorary
    gc_pic=models.ImageField(upload_to='categorary')
 
-## Create the goods information data list here.
+# Create the goods information model here.
 class GoodsInfo(models.Model):
    # The name of goods
    gi_name=models.CharField(max_length=50)
