@@ -4,10 +4,10 @@ from django.db import models
 class OrderInfo(models.Model):
     # Kinds of order status
     status=(
-        (1,'Pending payment')
-        (2,'Pending delivery')
-        (3,'Pending receipt')
-        (4,'Order completed')
+        (1,'Pending payment'),
+        (2,'Pending delivery'),
+        (3,'Pending receipt'),
+        (4,'Order completed'),
     )
     
     # Order Number
@@ -21,15 +21,15 @@ class OrderInfo(models.Model):
     # Shipping cost
     order_ship=models.IntegerField(5)
     # Order extra information
-    order_extr=models.CharField(300)
+    order_extr=models.CharField(max_length=300)
     # Order status
     order_stat=models.IntegerField(default=1,choices=status)
 
 # Create the order goods model
 class OrderGoods(models.Model):
     # Product Information
-    goods_info=models.ForeignKey('goods.GoodsInfo')
+    goods_info=models.ForeignKey('goods.GoodsInfo',on_delete=models.CASCADE)
     # Number of items
     goods_numb=models.IntegerField()
     # Product order
-    goods_order=models.ForeignKey('OrderInfo')
+    goods_order=models.ForeignKey('OrderInfo',on_delete=models.CASCADE)

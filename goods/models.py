@@ -20,4 +20,4 @@ class GoodsInfo(models.Model):
    # The picture of goods
    gi_pic=models.ImageField(upload_to='goods')
    # The category of goods
-   gi_cag=models.ForeignKey('GoodsCategory')
+   gi_cag=models.ForeignKey('GoodsCategory',on_delete=models.CASCADE)
