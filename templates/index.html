@@ -1,0 +1,22 @@
+
+
+{# The search bar #}
+{% block search_bar %}
+	<div class="search_bar clearfix">
+
+		<div class="search_con fl">
+            <form method="get" action="/search">
+			<input type="text" class="input_text fl" name="q" placeholder="Please search for goods">
+			<input type="submit" class="input_btn fr" name="" value="Search">
+		    </form>
+        </div>
+		<div class="guest_cart fr">
+			<a href="#" class="cart_name fl">My cart</a>
+			<div class="goods_count fl" id="show_count">{{ cart_count }}</div>
+		</div>
+	</div>
+{% endblock search_bar %}
+
+
+</body>
+</html>

@@ -8,7 +8,7 @@ class GoodsCategory(models.Model):
     # The sample of category
     # gc_sam = models.CharField(max_length=50)
     # The picture of category
-    gc_pic = models.ImageField(upload_to='cag')
+    gc_pic = models.ImageField(upload_to='categories')
 
 
 # Create the goods information model here.
@@ -23,4 +23,3 @@ class GoodsInfo(models.Model):
     gi_pic = models.ImageField(upload_to='goods')
     # The category of goods
     gi_cag = models.ForeignKey('GoodsCategory', on_delete=models.CASCADE)
-
