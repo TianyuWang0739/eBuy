@@ -1,11 +1,11 @@
-from django import http
-from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views import View
-from apps.user.forms import RegisterForm
-
+from django import http
+from .forms import RegisterForm
+from .models import User
 
 class RegisterView(View):
+
     def get(self, request):
         """提供用户注册页面"""
         return render(request, 'register.html')
@@ -24,7 +24,17 @@ class RegisterView(View):
             try:
                 User.objects.create_user(username=username, password=password, mobile=mobile)
             except Exception as e:
+                print(e)
                 return render(request, 'register.html', {'register_errmsg': '注册失败'})
+
+            # 状态保持
 
             # 响应结果
             return http.HttpResponse('注册成功, 重定向到首页')
+            # return redirect(reverse('contents:index'))
+        else:
+            print(register_form.errors.get_json_data())
+            context = {
+                'forms_errors': register_form.errors
+            }
+            return render(request, 'register.html', context=context)

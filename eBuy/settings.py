@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'cart',
     'user',
     'order',
+    'homepage'
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
 
         # Name of database
-        'NAME': 'ebuy',
+        'NAME': 'dailyfresh',
         # Address of database
         'HOST': 'localhost',
         # Port of database
