@@ -1,9 +1,9 @@
 
 let vm = new Vue({
-    el: '#app',  // 通过ID选择器找到绑定的HTML内容
-    delimiters: ['[[', ']]'],    // 修改Vue读取变量的语法
-    data: {     // 数据对象
-        // v-model
+    el: '#app',  // Find the bound HTML content by ID selector
+    delimiters: ['[[', ']]'],   // Change the syntax of Vue for reading variables
+    data: {     // Data objects
+        // vue-model
         username: '',
         password: '',
         password2: '',
@@ -13,7 +13,7 @@ let vm = new Vue({
         uuid: '',
         image_code: '',
 
-        // v-show
+        // vue-show
         error_name: false,
         error_password: false,
         error_password2: false,
@@ -36,7 +36,7 @@ let vm = new Vue({
             // 5-20 [a-zA-Z0-9_-]
             let re = /^[a-zA-Z0-9_-]{5,20}$/;
             if (re.test(this.username)){
-                // 匹配 不展示错误提示信息
+                // Match, no error message displayed
                 this.error_name = false;
             }else {
                 this.error_name = true;
@@ -49,25 +49,25 @@ let vm = new Vue({
                 axios.get(url, {
                     responseType: 'json'
                 })
-                    // 请求成功  function(response){}
+                    // Request successful  function(response){}
                     .then(response => {
                         // console.log(response.data);
                         if (response.data.count == 1){
-                            // 用户名已经存在
+                            // Username already exists
                             this.error_name_message = 'Username already exists';
                             this.error_name = true
                         }else {
                             this.error_name = false
                         }
                     })
-                    // 请求不成功
+                    // Request unsuccessful
                     .catch(error => {
                         console.log(error.response)
                     })
             }
 
         },
-        // 校验密码
+        // Verify password
         check_password() {
             let re = /^[0-9A-Za-z]{8,20}$/;
             if (re.test(this.password)) {
@@ -76,7 +76,7 @@ let vm = new Vue({
                 this.error_password = true;
             }
         },
-        // 校验确认密码
+        // Verify Confirmation Password
         check_password2() {
             if (this.password != this.password2) {
                 this.error_password2 = true;
@@ -84,7 +84,7 @@ let vm = new Vue({
                 this.error_password2 = false;
             }
         },
-        // 校验手机号
+        // Verify mobile phone number
         check_mobile(){
             let re = /^0\d{10}$/;
             if (re.test(this.mobile)) {
@@ -99,7 +99,7 @@ let vm = new Vue({
                 axios.get(url, {
                     responseType: 'json'
                 })
-                    // 请求成功  function(response){}
+                    // Request successful  function(response){ }
                     .then(response => {
 
                         if (response.data.count == 1){
@@ -110,7 +110,7 @@ let vm = new Vue({
                             this.error_mobile = false
                         }
                     })
-                    // 请求不成功
+                    // Request unsuccessful
                     .catch(error => {
                         console.log(error.response)
                     })
@@ -131,8 +131,10 @@ let vm = new Vue({
             this.check_mobile();
             this.check_allow();
 
-            if (this.error_name == true || this.error_password == true || this.error_password2 == true ||  this.error_mobile == true || this.error_allow == true){
-                // 禁用掉表单的提交事件
+            if (this.error_name == true || this.error_password == true
+            || this.error_password2 == true ||  this.error_mobile == true
+            || this.error_allow == true){
+                // Disable form submit events
                 window.event.returnValue = false;
             }
 
