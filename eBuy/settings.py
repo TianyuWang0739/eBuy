@@ -95,7 +95,7 @@ DATABASES = {
     }
 }
 
-# Redis缓存 0-15  16
+# Redis cache 0-15  16
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
@@ -111,13 +111,7 @@ CACHES = {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     },
-    "verify_code": {    # 验证码
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379/2",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    }
+
 }
 
 SESSION_ENGINE = "django.contrib.sessions.backends.cache"
@@ -166,5 +160,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# 指定自定义的用户名 app.模型
+# Specify a custom username app.model
 AUTH_USER_MODEL = 'users.User'
