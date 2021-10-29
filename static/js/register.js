@@ -26,22 +26,11 @@ let vm = new Vue({
         error_code_message: ""
     },
 
-    // 页面加载完成之后会被调用的方法
-    mounted(){
-        // 生成图形验证码
-        this.generate_image_code();
-    },
+
 
     methods: {
 
-        // 生成图片验证码
-        generate_image_code(){
-            // uuid 发生变化
-            this.uuid = generateUUID();
-            this.image_code_url = '/image_codes/'+ this.uuid +'/'
-        },
 
-        // 检验用户名
         check_username(){
 
             // 5-20 [a-zA-Z0-9_-]
@@ -51,12 +40,12 @@ let vm = new Vue({
                 this.error_name = false;
             }else {
                 this.error_name = true;
-                this.error_name_message = '请输入5-20个字符的用户名';
+                this.error_name_message = 'Please enter a username of 5 - 20 characters';
             }
 
             if (this.error_name == false){
                 let url = '/users/usernames/'+ this.username +'/count/';
-                // axios.get(url, 请求头(字典))
+                // axios.get(url, )
                 axios.get(url, {
                     responseType: 'json'
                 })
@@ -65,7 +54,7 @@ let vm = new Vue({
                         // console.log(response.data);
                         if (response.data.count == 1){
                             // 用户名已经存在
-                            this.error_name_message = '用户名已经存在';
+                            this.error_name_message = 'Username already exists';
                             this.error_name = true
                         }else {
                             this.error_name = false
@@ -97,12 +86,34 @@ let vm = new Vue({
         },
         // 校验手机号
         check_mobile(){
-            let re = /^1[3-9]\d{9}$/;
+            let re = /^0\d{10}$/;
             if (re.test(this.mobile)) {
                 this.error_mobile = false;
             } else {
-                this.error_mobile_message = '您输入的手机号格式不正确';
+                this.error_mobile_message = 'The mobile phone number you have entered is not in the correct format';
                 this.error_mobile = true;
+            }
+            if (this.error_mobile == false){
+                let url = '/users/mobile/'+ this.mobile +'/count/';
+
+                axios.get(url, {
+                    responseType: 'json'
+                })
+                    // 请求成功  function(response){}
+                    .then(response => {
+
+                        if (response.data.count == 1){
+                            // The mobile phone number already exists
+                            this.error_mobile_message = 'The mobile phone number already exists';
+                            this.error_mobile = true
+                        }else {
+                            this.error_mobile = false
+                        }
+                    })
+                    // 请求不成功
+                    .catch(error => {
+                        console.log(error.response)
+                    })
             }
         },
         check_allow(){
@@ -110,17 +121,6 @@ let vm = new Vue({
                 this.error_allow = true;
             } else {
                 this.error_allow = false;
-            }
-        },
-
-        // 检查图形验证码
-        check_image_code(){
-            // alert(this.image_code.length);
-            if (this.image_code.length != 4){
-                this.error_code = true;
-                this.error_code_message = '图形验证码长度为4'
-            }else {
-                this.error_code = false
             }
         },
 
